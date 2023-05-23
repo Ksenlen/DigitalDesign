@@ -1,42 +1,49 @@
-﻿using System;
+﻿using System.Reflection;
 using System.Text;
+using TextAnalysisLibrary;
 
 
-Console.Write("Input file path: ");
-string inputFilename = Console.ReadLine();
-if (!File.Exists(inputFilename))
+class DigitalDesign
 {
-    Console.WriteLine( "File doesn't exist");
-    return;
-}
-
-string outputFilename = Path.GetFileNameWithoutExtension(inputFilename) + "_wordcount.txt";
-Dictionary<string, int> wordCounts = new Dictionary<string, int>();
-var delimeters = Enumerable.Range(0, 256).Select(i => (char)i).Where(c => !char.IsLetter(c)).ToArray();
-
-using (StreamReader reader = new StreamReader(inputFilename, Encoding.UTF8))
-{
-    string line;
-    while ((line = reader.ReadLine()) != null)
+    static void Main()
     {
-        string[] words = line.Split(delimeters, StringSplitOptions.RemoveEmptyEntries);
-        foreach (string word in words)
+        // Получение метода через рефлексию
+        Type type = typeof(TextAnalysisLibrary.TextAnalysis);
+        var methodInfo = type.GetMethod("GetTextAnalysis", BindingFlags.NonPublic | BindingFlags.Instance);
+
+
+        // Чтение текстового файла
+        Console.Write("Input file path: ");
+        string? inputFilename = Console.ReadLine();
+        if (!File.Exists(inputFilename))
         {
-            if (wordCounts.ContainsKey(word))
-                wordCounts[word]++;
-            else
-                wordCounts[word] = 1;
+            Console.WriteLine("File doesn't exist");
+            return;
         }
-    }
-}
+        string text = File.ReadAllText(inputFilename, Encoding.UTF8);
 
-List<KeyValuePair<string, int>> sortedWordCounts = wordCounts.ToList();
-sortedWordCounts.Sort((x, y) => y.Value.CompareTo(x.Value));
+        if (!String.IsNullOrEmpty(text))
+        {
+            // Вызов приватного метода из dll, получение результата и сортировка полученного результата
+            var wordCounts = methodInfo!.Invoke(new TextAnalysis(), new object[] { text }) as Dictionary<string, int>;
+            var sortedDict = wordCounts!.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-using (StreamWriter writer = new StreamWriter(outputFilename))
-{
-    foreach (KeyValuePair<string, int> pair in sortedWordCounts)
-    {
-        writer.WriteLine("{0}\t{1}", pair.Key, pair.Value);
+
+            // Запись результата в файл
+            string outputFilePath = Path.GetFileNameWithoutExtension(inputFilename) + "_wordcount.txt";// Путь к выходному файлу
+           
+            using StreamWriter writer = new(outputFilePath);
+            foreach (var entry in sortedDict)
+            {
+                writer.WriteLine($"{entry.Key}: {entry.Value}");
+            }
+            Console.WriteLine("Text processing completed. The result is written");
+        }
+        else
+        {
+            Console.WriteLine("File is empty");
+        }
+        
+        Console.ReadLine();
     }
 }
