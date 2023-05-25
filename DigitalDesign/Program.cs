@@ -50,7 +50,7 @@ class DigitalDesign
 
           
             // Вызов параллельного метода с использованием CurrentDict
-            string outputFilePathParallel3 = Path.GetFileNameWithoutExtension(inputFilename) + "_wordcountParallelCD.txt";// Путь к выходному файлу для параллельной обработки
+            string outputFilePathParallelCD = Path.GetFileNameWithoutExtension(inputFilename) + "_wordcountParallelCD.txt";// Путь к выходному файлу для параллельной обработки
 
             for (int i = 0; i < tests; i++)
             {
@@ -60,8 +60,8 @@ class DigitalDesign
                 timeTests.Add(stopwatch.ElapsedMilliseconds);
             }
             Console.WriteLine($"Время работы многопоточного алгоритма с использованием CurrentDictionary: {timeTests.Average()}");
-            var sortedDictParallel3 = wordCounts!.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value);
-            WritingToFile(sortedDictParallel3, outputFilePathParallel3);
+            var sortedDictParallelCD = wordCounts!.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value);
+            WritingToFile(sortedDictParallelCD, outputFilePathParallelCD);
             timeTests.Clear();
 
             // Вызов параллельного метода с разделением на части
