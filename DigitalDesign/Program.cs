@@ -55,7 +55,7 @@ class DigitalDesign
             for (int i = 0; i < tests; i++)
             {
                 stopwatch.Restart();
-                wordCounts = TextAnalysis.GetTextAnalysisParallelCD(text).ToDictionary(x => x.Key, x => x.Value);
+                wordCounts = TextAnalysis.GetTextAnalysisParallelCD(text);
                 stopwatch.Stop();
                 timeTests.Add(stopwatch.ElapsedMilliseconds);
             }

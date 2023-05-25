@@ -23,7 +23,7 @@ namespace TextAnalysisLibrary
 
         //Многопоточные методы  
           
-        public static ConcurrentDictionary<string, int> GetTextAnalysisParallelCD(string text)
+        public static Dictionary<string, int> GetTextAnalysisParallelCD(string text)
         {
             ConcurrentDictionary<string, int> wordCount = new();
             string[] words = text.Split(delimeters, StringSplitOptions.RemoveEmptyEntries);
@@ -31,7 +31,7 @@ namespace TextAnalysisLibrary
             {
                 wordCount.AddOrUpdate(word, 1, (_, count) => count + 1);
             });
-            return wordCount;
+            return wordCount.ToDictionary(x => x.Key, x => x.Value);
         }
 
 
