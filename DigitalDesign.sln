@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalDesign", "DigitalDesign\DigitalDesign.csproj", "{318262D9-C6E0-432D-AD66-A59E93891120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAnalysisLibrary", "TextAnalysisLibrary\TextAnalysisLibrary.csproj", "{64C837F2-C09B-4DA3-ABAF-E2B8C916FDBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextAnalysisLibrary", "TextAnalysisLibrary\TextAnalysisLibrary.csproj", "{64C837F2-C09B-4DA3-ABAF-E2B8C916FDBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationDD", "WebApplicationDD\WebApplicationDD.csproj", "{5DE627CC-B9C0-4101-A781-588DBEFB76E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{64C837F2-C09B-4DA3-ABAF-E2B8C916FDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64C837F2-C09B-4DA3-ABAF-E2B8C916FDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64C837F2-C09B-4DA3-ABAF-E2B8C916FDBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE627CC-B9C0-4101-A781-588DBEFB76E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE627CC-B9C0-4101-A781-588DBEFB76E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE627CC-B9C0-4101-A781-588DBEFB76E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE627CC-B9C0-4101-A781-588DBEFB76E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
